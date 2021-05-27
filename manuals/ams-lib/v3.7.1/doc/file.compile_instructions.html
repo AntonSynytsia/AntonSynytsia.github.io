@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  File: compile_instructions
+  
+    &mdash; Documentation by YARD 0.9.26
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "compile_instructions";
+  relpath = '';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="file_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="_index.html">Index</a> &raquo; 
+    <span class="title">File: compile_instructions</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><div id='filecontents'><h1 id="compile-instructions">Compile Instructions</h1>
+
+<p>To compile the C++ extension, you will need to first download the required
+binary and header dependencies; then, adjust two shared path macros to point
+to the downloaded dependencies. Refer to your operating-system-specific
+section for setting up the dependencies. Upon setting up the dependencies,
+you should be able to compile.</p>
+
+<h2 id="windows">Windows</h2>
+
+<h3 id="requirements">Requirements</h3>
+
+<p>The Windows project is set up with Visual Studio 2017, with the
+<em>Platform Toolset</em> set to <code>v141_xp</code>. If desired, you can upgrade or downgrade
+the solution to a different version of Visual Studio. Just be aware of the
+warnings and errors that may arise.</p>
+
+<h3 id="setup">Setup</h3>
+
+<p>Refer to the following steps to set up the required dependencies for
+Visual Studio:</p>
+
+<ol>
+<li><p>Download the <a href="https://drive.google.com/file/d/10CN1nZpIogg_xJ7X1aSReBSIfWOvx7E7/view?usp=sharing">Ruby C++ extension dependencies for Windows</a>.</p></li>
+<li><p>Extract the downloaded folder and save to a known location on your computer.</p></li>
+<li><p>Download the latest SketchUp SDK for 64-bit Windows:
+<a href="https://extensions.sketchup.com/sketchup-sdk">https://extensions.sketchup.com/sketchup-sdk</a></p></li>
+</ol>
+
+<ul>
+<li>Downloading the 32-bit SketchUp SDK is not necessary as the extension does
+ not depend on them.</li>
+<li>You can use the latest SDK for building binaries for older SketchUp
+ versions, such as for SketchUp 2016 64-bit; if making changes, just be
+ aware of an SDK function&#39;s minimum supported SketchUp version, indicated in
+ the SDK documentation.</li>
+</ul>
+
+<ol>
+<li><p>Clone the SU C Ext Utils by Anton:
+<a href="https://github.com/AntonSynytsia/su-cpp-ext-utils">https://github.com/AntonSynytsia/su-cpp-ext-utils</a></p></li>
+<li><p>Extract the downloaded folder and save to a known location on your computer.</p></li>
+<li><p>Open the <code>./ext-cpp/projects/vs/PropertySheet.props</code> file with an editor and
+do the following:</p>
+
+<ol>
+<li>Edit the <code>RubyCExt</code> macro to point to the Ruby C++ extension dependency
+folder.
+
+<ul>
+<li>Ensure the <code>bin</code> and <code>include</code> folders are accessible from the path.</li>
+<li>Ensure to include a <code>\</code> at the end of the path.</li>
+</ul></li>
+<li>Edit the <code>SketchUpSDK</code> marco to point to the downloaded SketchUp SDK
+folder.
+
+<ul>
+<li>Ensure the <code>binaries</code> and <code>headers</code> folders are accessible from the
+path.</li>
+<li>Ensure to include a <code>\</code> at the end of the path.</li>
+</ul></li>
+<li>Edit the <code>CExtUtils</code> marco to point to the cloned su-cpp-ext-utils.
+
+<ul>
+<li>Ensure the <code>utils</code> folder is accessible from the path.</li>
+<li>Ensure to include a <code>\</code> at the end of the path.</li>
+</ul></li>
+</ol></li>
+</ol>
+
+<p>Upon performing the steps, save and close the file. You can alternatively
+   edit this file from the Visual Studio <em>Property Manager</em> window.</p>
+
+<h3 id="compiling">Compiling</h3>
+
+<p>Refer to the following steps to compile <code>ams_lib.so</code> with Visual Studio:</p>
+
+<ol>
+<li>Set the build configuration to <code>Release (X.Y)</code></li>
+<li>Set the build platform to <code>x86</code> or <code>x64</code></li>
+<li>Build Solution. The release binaries should be automatically copied to
+<code>./ext-ruby/ams_Lib/libraries/stage/[win32/win64]/[X.Y]/</code>.</li>
+<li>To copy manually, copy</li>
+</ol>
+
+<p><code>./ext-cpp/projects/vs/[Win32/x64]/Release (X.Y)/ams_Lib/ams_lib.so</code></p>
+
+<p>to the appropriate binary folder:</p>
+
+<p><code>./ext-ruby/ams_Lib/libraries/stage/[win32/win64]/[X.Y]/</code></p>
+
+<h2 id="mac-os-x">Mac OS X</h2>
+
+<h3 id="requirements">Requirements</h3>
+
+<p>xCode</p>
+
+<h3 id="setup">Setup</h3>
+
+<p>Refer to the following steps to set up the required dependencies for
+Visual Studio:</p>
+
+<ol>
+<li><p>Download the <a href="https://drive.google.com/file/d/1yfGHlxrqh0--6SKT0JG-ubWr0FnWfGVt/view?usp=sharing">Ruby C++ extension dependencies for Mac OS X</a>.</p></li>
+<li><p>Extract the downloaded folder and save to a known location on your computer.</p></li>
+<li><p>Download the latest SketchUp SDK for 64-bit Mac OS X:
+<a href="https://extensions.sketchup.com/sketchup-sdk">https://extensions.sketchup.com/sketchup-sdk</a></p></li>
+</ol>
+
+<ul>
+<li>Downloading the 32-bit SketchUp SDK is not necessary as the extension does
+ not depend on them.</li>
+<li>You can use the latest SDK for building binaries for older SketchUp
+ versions, such as for SketchUp 2016 64-bit; if making changes, just be
+ aware of an SDK function&#39;s minimum supported SketchUp version, indicated in
+ the SDK documentation.</li>
+</ul>
+
+<ol>
+<li><p>Extract the downloaded folder and save to a known location on your computer.</p></li>
+<li><p>Open the xCode project and do the following:</p>
+
+<ol>
+<li>Select <code>ams_lib</code> project, click on the <code>Build Settings</code> tab and scroll
+down to <code>User-Defined</code> section.</li>
+<li>Edit the <code>RubyCExt</code> macro to point to the Ruby C++ extension dependency
+folder.
+
+<ul>
+<li>Ensure the <code>bin</code> and <code>include</code> folders are accessible from the path.</li>
+<li>Ensure to include a <code>/</code> at the end of the path.</li>
+</ul></li>
+<li>Edit the <code>SketchUpSDK</code> marco to point to the downloaded SketchUp SDK
+folder.
+
+<ul>
+<li>Ensure <code>SketchUpAPI.framework</code> is accessible from the path.</li>
+<li>Ensure to include a <code>/</code> at the end of the path.</li>
+</ul></li>
+<li>Save the project</li>
+<li>Select a target, click on <code>Build Phases</code> tab, expand the
+<code>Link Binary With Libraries</code> dropdown, and do the following:
+
+<ul>
+<li>Ensure <code>Ruby.Framework</code> is set. If not set, click on the add button and
+locate the corresponding Ruby framework within the downloaded Ruby
+C++ extension dependencies.</li>
+<li>If the target is 64bit, ensure <code>SketchUpAPI.framework</code> is set. If not
+set, click on the add button and locate the framework within the
+downloaded SketchUp SDK dependencies.</li>
+</ul></li>
+</ol></li>
+</ol>
+
+<h3 id="compiling">Compiling</h3>
+
+<p>Refer to the following steps to compile <code>ams_lib.bundle</code> with xCode:</p>
+
+<ol>
+<li>Set the active scheme to <code>Ruby (X.Y) - [32/64]</code></li>
+<li>Execute <code>(Menu) Product &gt; Archive</code></li>
+<li>Export the built archive to your documents.</li>
+<li>Locate <code>ams_lib.bundle</code> within the exported archive.</li>
+<li>Copy <code>ams_lib.bundle</code> to the appropriate binary folder:</li>
+</ol>
+
+<p><code>ext-ruby/ams_Lib/libraries/stage/[osx32/osx64]/[X.Y]/</code></p>
+</div></div>
+
+      <div id="footer">
+  Generated on Wed May 26 20:05:41 2021 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.26 (ruby-2.7.1).
+</div>
+
+    </div>
+  </body>
+</html>
